@@ -1,3 +1,3 @@
 - Bruce Tate
-- 
+- Nicholas Fanelli Hugueney
 - 
