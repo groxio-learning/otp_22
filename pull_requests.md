@@ -2,3 +2,4 @@
 - Nicholas Fanelli Hugueney
 - Liv Cella
 - Paulo Valim
+- Philip Arturo Cesani
