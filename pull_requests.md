@@ -1,3 +1,4 @@
 - Bruce Tate
 - Nicholas Fanelli Hugueney
+- Liv Cella
 - Paulo Valim
