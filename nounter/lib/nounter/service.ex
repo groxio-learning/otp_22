@@ -1,29 +1,29 @@
-defmodule Nounter.Server do
-  use GenServer
+defmodule Nounter.Service do
   alias Nounter.Counter
 
-@impl true
-  def init(input) do
-    {:ok, Counter.new(input)}
+  def start(input) do
+    counter = Counter.new(input)
+    spawn(fn -> loop(counter) end)
   end
 
-  def start_link(input) do
-    IO.puts("Starting Nounter Server")
-    GenServer.start_link(__MODULE__, input)
+  def loop(counter) do
+    counter
+    |> listen()
+    |> loop()
   end
 
-  @impl true
-  def handle_call(:show, _from, counter) do
-    {:reply, Counter.show(counter), counter}
-  end
+  def listen(counter) do
+    receive do
+      :inc ->
+        Counter.inc(counter)
 
-  @impl true
-  def handle_cast(:inc, counter) do
-    {:noreply, Counter.inc(counter)}
-  end
+      :dec ->
+        Counter.dec(counter)
 
-  @impl true
-  def handle_cast(:dec, counter) do
-    {:noreply, Counter.dec(counter)}
+      {:show, from} ->
+        new_state = counter
+        send(from, Counter.show(counter))
+        new_state
+    end
   end
 end
