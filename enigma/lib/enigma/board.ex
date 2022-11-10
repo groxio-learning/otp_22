@@ -14,18 +14,32 @@ defmodule Enigma.Board do
     ? ? ? ?
     #{show_rows(board)}
 
-    status: playing
+    status: #{status(board)}
 
     """
   end
 
-  def show_row(row, _code) do
-    "#{Enum.join(row, " ")} | RRW"
+  defp show_row(row, code) do
+    "#{Enum.join(row, " ")} | #{Enigma.Score.render(row, code)}"
   end
 
-  def show_rows(board) do
+  defp show_rows(board) do
     board.rows
     |> Enum.map(fn row -> show_row(row, board.code) end)
     |> Enum.join("\n")
+  end
+
+  defp status(%{rows: [code | _rest], code: code}) do
+    "Won"
+  end
+
+  defp status(board) do
+    if length(board.rows) < 10 do
+      "Playing"
+
+    else
+      "Lost"
+    end
+
   end
 end
