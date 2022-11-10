@@ -9,7 +9,7 @@ defmodule Nounter.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Nounter.Worker.start_link(arg)
-      # {Nounter.Worker, arg}
+      {Nounter.Server, "42"}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
