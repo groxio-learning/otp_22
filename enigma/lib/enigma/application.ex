@@ -9,12 +9,16 @@ defmodule Enigma.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Enigma.Worker.start_link(arg)
-      {Enigma.Server, :enigma}
+      {Enigma.Server, :antman},
+      {Enigma.Server, :gandalf},
+      {Enigma.Server, :groot},
+      {Enigma.Server, :snape},
+      {Enigma.Server, :superman},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Sup]
+    opts = [strategy: :rest_for_one, name: Sup]
     Supervisor.start_link(children, opts)
   end
 end

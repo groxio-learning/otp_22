@@ -26,4 +26,9 @@ defmodule Enigma.Server do
     new_board = Board.guess(board, guess)
     {:reply, Board.show(new_board), new_board}
   end
+
+  def child_spec(name) do
+    %{id: name, start: {Enigma.Server, :start_link, [name]}}
+  end
+
 end
