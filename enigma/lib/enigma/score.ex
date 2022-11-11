@@ -20,7 +20,7 @@ defmodule Enigma.Score do
   @spec render(
     [a: Integer.t(), b: Integer.t(), c: Integer.t(), d: Integer.t()],
     [a: Integer.t(), b: Integer.t(), c: Integer.t(), d: Integer.t()])
-     :: String.t()
+    :: String.t()
   def render(row, code) do
     new(row, code)
     |> show()
